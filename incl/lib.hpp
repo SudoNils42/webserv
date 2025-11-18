@@ -9,5 +9,8 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <vector>
+#include <poll.h>
+#include <arpa/inet.h>
 
 #endif
