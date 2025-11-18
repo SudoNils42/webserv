@@ -42,7 +42,7 @@ void SocketManager::addClient(int client_fd) {
 
 void SocketManager::removeClient(size_t i) {
     close(_fds[i].fd);
-    _fds.erase(_fds.begin() + 1);
+    _fds.erase(_fds.begin() + i);
 }
 
 void SocketManager::handleNewConnection() {
