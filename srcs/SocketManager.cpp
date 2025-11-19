@@ -6,7 +6,6 @@ SocketManager::SocketManager(int port) {
     struct pollfd server_poll;
     server_poll.fd = _server_fd;
     server_poll.events = POLLIN;
-    server_poll.revents = 0;
     _fds.push_back(server_poll);
     std::cout << "server listening on port " << port << std::endl;
 }
@@ -36,7 +35,6 @@ void SocketManager::addClient(int client_fd) {
     struct pollfd client_poll;
     client_poll.fd = client_fd;
     client_poll.events = POLLIN;
-    client_poll.revents = 0;
     _fds.push_back(client_poll);
 }
 
