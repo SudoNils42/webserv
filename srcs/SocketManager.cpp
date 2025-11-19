@@ -17,7 +17,7 @@ SocketManager::~SocketManager() {
 }
 
 void SocketManager::setupServerSocket(int port) {
-    _server_fd = socket (AF_INET, SOCK_STREAM, 0);
+    _server_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     
     int opt = 1;
     setsockopt(_server_fd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
@@ -75,16 +75,17 @@ void SocketManager::handleClientData(int client_fd) {
 void SocketManager::run() {
     while (1)
     {
-        poll(_fds.data(), _fds.size(), -1);
+        poll(&_fds[0], _fds.size(), -1);
 
         for (size_t i = 0; i < _fds.size(); i++)
         {
-            if (_fds[i].revents == 0)
-                continue;
-            if (_fds[i].fd == _server_fd)
-                handleNewConnection();
-            else if (_fds[i].revents & POLLIN)
-                handleClientData(_fds[i].fd);
+            if (_fds[i].revents == POLLIN)
+            {
+                if (_fds[i].fd == _server_fd)
+                    handleNewConnection();
+                else
+                    handleClientData(_fds[i].fd);
+            }
         }
     }
 }
