@@ -13,4 +13,11 @@
 #include <poll.h>
 #include <arpa/inet.h>
 
+#include <vector>
+#include <fstream>
+#include <exception>
+#include <sstream>
+#include <cctype>
+#include <map>
+
 #endif
