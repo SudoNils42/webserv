@@ -6,6 +6,7 @@ class SocketManager {
     private:
         int _server_fd;
         std::vector<pollfd> _fds;
+        std::vector<std::string> _body_parts;
 
     public:
         SocketManager(int port);
